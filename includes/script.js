@@ -32,7 +32,6 @@ $(document).ready(function () {
                 $("#content").html(text);
             }
         });
-        
         //change text in button
         $("#start").text("Click here for ANUSTART");
     });
