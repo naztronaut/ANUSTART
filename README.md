@@ -10,4 +10,4 @@ Update the config.php file to connect to your created database
 Contains the AJAX which pulls from source.php
 
 ###Demo
-view demo at [http://anustart.xyz/](anustart.xyz)
+view demo at [anustart.xyz](http://anustart.xyz/)
