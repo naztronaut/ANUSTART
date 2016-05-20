@@ -1,39 +1,71 @@
 $(document).ready(function () {
+
+    //get URL for specific search
+    if (location.search) {
+        var param = location.search;
+        param = param.split("=");
+        var param2 = param[1].split("&");
+        if (!isNaN(param2)) {
+            param2 = "id=" + param2[0];
+            //let dom load and trigger click after 1ms
+            setTimeout(function () {
+                $("#start").trigger("click");
+            }, 1);
+            //set param2 back to blank so the #start button generates new content
+            setTimeout(function () {
+                param2 = "";
+            }, 50);
+        } else {
+            param2 = "";
+        }
+        //        console.log(param2);
+    }
     //on click of the #start button
-    $("#start").click(function () {
+    $("#start").on("click", function () {
         //run this ajax
         $.ajax({
             url: "source.php",
             method: "GET",
+            data: param2,
             dataType: "json",
             success: function (data) {
                 var text = ''; //text placeholder
-                for(var i = 0; i < data.length; i++)
-                    {
-                        //create span element and input the incoming data name 
-                        var nameSpan = $("<span>",{class: "name col-sm-4 text-right"}); 
-                        $(nameSpan).text(data[i].name);
-                        
-                        //buffer div to append nameSpan to
-                        var buffer = $("<div>", {class: "row"});
-                        $(buffer).append($(nameSpan).append(": "));
-                        
-                        //create span for quote and assign text from query
-                        var quoteSpan = $("<span>", {class: "quote col-sm-8 text-justify"});
-                        $(quoteSpan).text(data[i].quote);
+                for (var i = 0; i < data.length - 1; i++) {
+                    //create span element and input the incoming data name 
+                    var nameSpan = $("<span>", {
+                        class: "name col-sm-3 text-right"
+                    });
+                    $(nameSpan).text(data[i].name);
 
-                        //append quote to buffer so it appears after nameSpan
-                        $(buffer).append($(quoteSpan)).append("<br />");
-                        
-                        //assign entire buffer's HTML to text
-                        text += $(buffer)[0].outerHTML;
-                    }
+                    //buffer div to append nameSpan to
+                    var buffer = $("<div>", {
+                        class: "row"
+                    });
+                    $(buffer).append($(nameSpan).append(": "));
+
+                    //create span for quote and assign text from query
+                    var quoteSpan = $("<span>", {
+                        class: "quote col-sm-9 text-justify"
+                    });
+                    $(quoteSpan).text(data[i].quote);
+
+                    //append quote to buffer so it appears after nameSpan
+                    $(buffer).append($(quoteSpan)).append("<br />");
+
+                    //assign entire buffer's HTML to text
+                    text += $(buffer)[0].outerHTML;
+                }
                 //replace #content html with above text
-                $("#content").html(text);
+                $("#content").hide().html(text).fadeIn({duration: 600});
+                //                console.log(data[data.length - 1].id);
+                var shareUrl = location.origin + location.pathname + "?id=" + data[data.length - 1].id;
+                $("#shareBox").val(shareUrl);
             }
         });
         //change text in button
-        $("#start").text("Click here for ANUSTART");
+        $("#start").html("<i class=\"fa fa-rocket\" aria-hidden=\"true\"></i> Click here for ANUSTART");
     });
 
+    //instantiate copy url button
+    new Clipboard('.copyButton');
 });

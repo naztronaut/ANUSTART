@@ -8,4 +8,15 @@
     font-weight: 600;
 /*    text-decoration: underline;*/
     font-family: de-walpergens-pica, sans-serif;
+        padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.header{
+    padding-top: 15px;
+}
+
+.quote{
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

@@ -1,9 +1,16 @@
 <?php
     include_once("config.php");
 
-    $query = "SELECT * FROM nustart ORDER BY RAND() LIMIT 1";
+    $query = "SELECT * FROM nustart";
+    
+    if(isset($_GET['id']))
+    {
+        $query .= " WHERE id=".$_GET['id'];    
+    }
+    $query .= " ORDER BY RAND() LIMIT 1";
     $result = mysqli_query($conn, $query);
-
+//    echo mysqli_num_rows($result);
+if(mysqli_num_rows($result) > 0){
     while($rows = mysqli_fetch_assoc($result)) //loop and print team name, number, ticker, vts/ir URLs
     {
         //add every line to a different array
@@ -25,8 +32,18 @@
             //add each $data array into $newdata array             
             array_push($newdata,($dataset));
         }
-
+        array_push($newdata,array("id" => $rows['id']));
         //encode array to json and echo it
         print_r(json_encode($newdata));
     }
+}
+
+else {
+    $error = array();
+    array_push($error,array("name"=>"Error","quote"=>"No results found, try again!"));
+    array_push($error,array("id"=>"123456"));
+//    print_r($error);
+    print_r(json_encode($error));
+    
+}
 ?>
