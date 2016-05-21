@@ -1,3 +1,13 @@
+/*
+script.php
+Title: ANUSTART
+Author: Nazmus
+URL: http://nazm.us
+Github: https://github.com/nlinux1/
+
+This script contains all custom JavaScript functionality
+*/
+
 $(document).ready(function () {
 
     //get URL for specific search
@@ -73,6 +83,7 @@ $(document).ready(function () {
         //change text in button
         $("#start").html("<i class=\"fa fa-rocket\" aria-hidden=\"true\"></i> Click here for ANUSTART");
 
+        //trigger analyitics.php and send ipAddress and update click command
         $.ajax({
             url: "analytics.php",
             method: "post",

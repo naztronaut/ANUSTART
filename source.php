@@ -1,4 +1,13 @@
 <?php
+/*
+source.php 
+Title: ANUSTART
+Author: Nazmus
+URL: http://nazm.us
+Github: https://github.com/nlinux1/
+
+This script outputs data from the MySQL Database table containing quotes
+*/
     include_once("config.php");
 
     $query = "SELECT * FROM nustart";

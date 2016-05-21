@@ -1,8 +1,17 @@
 <?php
+/*
+config.php 
+Title: ANUSTART
+Author: Nazmus
+URL: http://nazm.us
+Github: https://github.com/nlinux1/
+
+MySQL Database Configuration File
+*/
 
 $server = "localhost"; //server name/url
-$username = "nustart"; //MySQL Username
-$password = ""; //MySQL Password 
+$username = "nustart"; // MySQL Username
+$password = ""; // MySQL Password 
 $db = "nustart"; // MySQL Database name
 
 // Create connection
