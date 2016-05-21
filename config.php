@@ -10,9 +10,9 @@ MySQL Database Configuration File
 */
 
 $server = "localhost"; //server name/url
-$username = "nustart"; // MySQL Username
-$password = ""; // MySQL Password 
-$db = "nustart"; // MySQL Database name
+$username = "nustart"; //"anustart_nustart"; //MySQL Username
+$password = ""; //"Xf1xyP*5T^aB"; //MySQL Password 
+$db = "nustart"; //"anustart_nustart"; // MySQL Database name
 
 // Create connection
 $conn = mysqli_connect($server, $username, $password, $db);
