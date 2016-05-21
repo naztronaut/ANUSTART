@@ -30,3 +30,23 @@ Custom CSS file for ANUSTART (on top of Boostrap)
     padding-top: 10px;
     padding-bottom: 10px;
 }
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: dotted #d9534f 1px;
+    font-size: 12px;
+    padding-bottom: 8px;
+    
+/*    padding-top: 8px;*/
+}
+
+
+.footText, .footText a{
+    padding-top: 5px;
+    color: #d9534f;
+}
+
+.url{
+    padding-bottom: 15px;
+}
