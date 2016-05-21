@@ -44,6 +44,10 @@ if(mysqli_num_rows($result) > 0){
         array_push($newdata,array("id" => $rows['id']));
         //encode array to json and echo it
         print_r(json_encode($newdata));
+        
+        //count the number of times this row was loaded 
+        $updateCounter = "UPDATE `nustart` SET `counter`= `counter`+1 WHERE id = " . $rows['id'];
+        mysqli_query($conn,$updateCounter);
     }
 }
 
