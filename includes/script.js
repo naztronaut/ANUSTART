@@ -20,6 +20,12 @@ $(document).ready(function () {
         }
         //        console.log(param2);
     }
+
+    //grab IP for analytics
+    var ipAddr;
+    $.getJSON('http://ipinfo.io', function (data) {
+        ipAddr = data.ip;
+    });
     //on click of the #start button
     $("#start").on("click", function () {
         //run this ajax
@@ -56,7 +62,9 @@ $(document).ready(function () {
                     text += $(buffer)[0].outerHTML;
                 }
                 //replace #content html with above text
-                $("#content").hide().html(text).fadeIn({duration: 600});
+                $("#content").hide().html(text).fadeIn({
+                    duration: 600
+                });
                 //                console.log(data[data.length - 1].id);
                 var shareUrl = location.origin + location.pathname + "?id=" + data[data.length - 1].id;
                 $("#shareBox").val(shareUrl);
@@ -64,6 +72,15 @@ $(document).ready(function () {
         });
         //change text in button
         $("#start").html("<i class=\"fa fa-rocket\" aria-hidden=\"true\"></i> Click here for ANUSTART");
+
+        $.ajax({
+            url: "analytics.php",
+            method: "post",
+            data: 'ipAddr=' + ipAddr + '&updateClick=1',
+//            success: function (data) {
+//                console.log(data);
+//            }
+        });
     });
 
     //instantiate copy url button

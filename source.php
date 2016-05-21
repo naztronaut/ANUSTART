@@ -41,7 +41,7 @@ if(mysqli_num_rows($result) > 0){
 else {
     $error = array();
     array_push($error,array("name"=>"Error","quote"=>"No results found, try again!"));
-    array_push($error,array("id"=>"123456"));
+    array_push($error,array("id"=>"1"));
 //    print_r($error);
     print_r(json_encode($error));
     
