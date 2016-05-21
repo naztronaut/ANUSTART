@@ -9,5 +9,8 @@ Update the config.php file to connect to your created database
 ###scripts.js
 Contains the AJAX which pulls from source.php
 
+###analytics.php
+Contains code to track quote generations. Must use the analytics table in MySQL
+
 ###Demo
 view demo at [anustart.xyz](http://anustart.xyz/)
