@@ -10,38 +10,15 @@ This script contains all custom JavaScript functionality
 
 $(document).ready(function () {
 
-    var id='';
-    var title='';
     //get URL for specific search
     if (location.search) {
         var param = location.search;
-        param = param.split("?");
-        
-        param = param[1].split("&");
-//        console.log(param);
-        
-        for(var i=0;i<param.length;i++)
-        {
-            param2 = param[i].split("=");
-            for(var j=0;j<param2.length;j++)
-            {
-                if(param2[j]=='id')
-                {
-                    id = param2[j+1];
-                }
-                else if(param2[j]=='title')
-                {
-                    title = param2[j+1];
-                    updateDropdown(title);
-                }
-            }
-        }
-//        console.log(id + title);
-//        var param2 = param[1].split("&");
-        var param2;
-//        console.log(param2);
-        if (!isNaN(id)) {
-            param2 = "id=" + id + "&title="+title;
+        param = param.split("=");
+        console.log(param);
+        var param2 = param[1].split("&");
+        console.log(param2);
+        if (!isNaN(param2)) {
+            param2 = "id=" + param2[0];
             //let dom load and trigger click after 1ms
             setTimeout(function () {
                 $("#start").trigger("click");
@@ -53,7 +30,7 @@ $(document).ready(function () {
         } else {
             param2 = "";
         }
-//                console.log(param2);
+        //        console.log(param2);
     }
 
     //grab IP for analytics
@@ -71,7 +48,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 var text = ''; //text placeholder
-                for (var i = 0; i < data.length - 2; i++) {
+                for (var i = 0; i < data.length - 1; i++) {
                     //create span element and input the incoming data name 
                     var nameSpan = $("<span>", {
                         class: "name col-sm-3 text-right"
@@ -101,12 +78,9 @@ $(document).ready(function () {
                     duration: 600
                 });
                 //                console.log(data[data.length - 1].id);
-                var shareUrl = location.origin + location.pathname;// + "?title=" + data[data.length-1].title;
-                shareUrl += "?id=" + data[data.length - 2].id;
+                var shareUrl = location.origin + location.pathname + "?id=" + data[data.length - 1].id;
                 $("#shareBox").val(shareUrl);
                 footerScroll();
-                updateDropdown(data[data.length-1].title);
-//                console.log(data[data.length-1].title);
             }
         });
         //change text in button
@@ -121,6 +95,9 @@ $(document).ready(function () {
             //                console.log(data);
             //            }
         });
+
+
+
     });
 
     //instantiate copy url button
@@ -139,33 +116,4 @@ $(document).ready(function () {
 
     //call footerScroll if window is resized to move footer position
     $(window).resize(footerScroll);
-    
-    $(".showtitle").on("click",function(e){
-//       console.log($(e.target).data('name')); 
-        title = $(e.target).data('name');
-        if(title == 'all'){
-            param2 = "";
-        }
-        else
-        {
-            param2 = "title="+title;
-        }
-        $("#start").trigger("click");
-        $("#showDropdown").html($(e.target).html()).append(" <span class=\"caret\"></span>");
-    });
-    
-    function updateDropdown(p){
-        if(p == "pr")
-        {
-            $("#showDropdown").html("Parks &amp; Rec").append(" <span class=\"caret\"></span>");
-        }
-        else if(p == "all")
-        {
-            $("#showDropdown").html("All Shows").append(" <span class=\"caret\"></span>");
-        }
-        else
-        {
-            $("#showDropdown").html("Arrested Development").append(" <span class=\"caret\"></span>");
-        }
-    }
 });

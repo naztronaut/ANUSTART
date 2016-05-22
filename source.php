@@ -14,21 +14,37 @@ This script outputs data from the MySQL Database table containing quotes
     
     if(isset($_GET['title']))
     {
-        $query .= " WHERE showTitle='". $_GET['title']."'";
-        
+        if($_GET['title'] !="")
+        {
+            $query .= " WHERE showTitle='". $_GET['title']."'";
+            $buffer = 1;
+        }
+        else
+        {
+            $query .=" WHERE ";
+            $buffer = 0;
+        }
+
         if(isset($_GET['id']))
         {
-            $query .= " AND id = ". $_GET['id'];
+            if($buffer == 1)
+            {
+                $query .= " AND id = ". $_GET['id'];
+            }
+            elseif($buffer == 0)
+            {
+                $query .= " id = ". $_GET['id'];
+            }
         }
     }
     else
     {
         if(isset($_GET['id']))
         {
-            $query .= " WHERE showTitle = 'ad' AND id = ". $_GET['id'];
+            $query .= " WHERE id = ". $_GET['id'];
         }
     }
-
+//echo $query;
 //    if(isset($_GET['id']))
 //    {
 //        $query .= " WHERE id=".$_GET['id'];
