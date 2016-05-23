@@ -1,5 +1,5 @@
 /*
-script.php
+script.js
 Title: ANUSTART
 Author: Nazmus
 URL: http://nazm.us

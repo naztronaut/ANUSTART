@@ -1,41 +1,38 @@
 /*
-script.php
+menu.js
 Title: ANUSTART
 Author: Nazmus
 URL: http://nazm.us
 Github: https://github.com/nlinux1/
 
-This script contains all custom JavaScript functionality
+This script contains custom navigation and actions
 */
 
 $(document).ready(function () {
     
     $(".menuTitle").on("click",function(e){
-       console.log($(e.target).data('name')); 
+        console.log($(e.target).data('name'));
         title = $(e.target).data('name');
 
-        if(title == "home")
+        //trigger appropriate function with input
+        switch(title)
         {
-            $("#start").trigger("click");
-        }
-//        $("#showDropdown").html($(e.target).html()).append(" <span class=\"caret\"></span>");
-        if(title == "about")
-        {
-            aboutMe();
-        }
-        
-        if(title=="howto")
-        {
-            howTo();   
-        }
-        if(title=="contact")
-        {
-            contact();   
+            case "home":
+                $("#start").trigger("click");
+                break;
+            case "about":
+                aboutMe();
+                break;
+            case "howto":
+                howTo();
+                break;
+            case "contact":
+                contact();  
+                break;
         }
     });
     
     function aboutMe(){
-     
         text = "Welcome to ANUSTART! This is a fun script created by <a href=\"http://nazm.us\" target=\"_blank\">Nazmus</a>. It comprises of HTML, CSS, and JavaScript backend (lots of jQuery), and PHP and MySQL backend. More info to come later! Click the \"START\" button above to keep rolling!";
         
         $("#start").html("<i class=\"fa fa-rocket\" aria-hidden=\"true\"></i> Click here to Start");
