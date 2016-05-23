@@ -18,8 +18,7 @@ $(document).ready(function () {
         param = param.split("?");
         
         param = param[1].split("&");
-//        console.log(param);
-        
+
         for(var i=0;i<param.length;i++)
         {
             param2 = param[i].split("=");
@@ -36,12 +35,17 @@ $(document).ready(function () {
                 }
             }
         }
-//        console.log(id + title);
-//        var param2 = param[1].split("&");
+
         var param2;
 //        console.log(param2);
         if (!isNaN(id)) {
-            param2 = "id=" + id + "&title="+title;
+            var paramText = ''; //placeholder
+            //if id exists, then add to param2, else just ask for title - allows viewing by title only
+            if(id)
+            {
+                paramText = "id=" + id + "&";
+            }
+            param2 = paramText + "title="+title;
             //let dom load and trigger click after 1ms
             setTimeout(function () {
                 $("#start").trigger("click");
@@ -53,7 +57,6 @@ $(document).ready(function () {
         } else {
             param2 = "";
         }
-//                console.log(param2);
     }
 
     //grab IP for analytics
@@ -61,6 +64,7 @@ $(document).ready(function () {
     $.getJSON('http://ipinfo.io', function (data) {
         ipAddr = data.ip;
     });
+    
     //on click of the #start button
     $("#start").on("click", function () {
         //run this ajax
@@ -104,9 +108,8 @@ $(document).ready(function () {
                 var shareUrl = location.origin + location.pathname;// + "?title=" + data[data.length-1].title;
                 shareUrl += "?id=" + data[data.length - 2].id;
                 $("#shareBox").val(shareUrl);
-                footerScroll();
-                updateDropdown(data[data.length-1].title);
-//                console.log(data[data.length-1].title);
+                footerScroll(); //change footer location if necessary
+                updateDropdown(data[data.length-1].title); //update dropdown list with Title
             }
         });
         //change text in button
@@ -117,15 +120,13 @@ $(document).ready(function () {
             url: "analytics.php",
             method: "post",
             data: 'ipAddr=' + ipAddr + '&updateClick=1',
-            //            success: function (data) {
-            //                console.log(data);
-            //            }
         });
     });
 
     //instantiate copy url button
     new Clipboard('.copyButton');
 
+    //change footer dynamics depending on window size - realtive or fixed
     function footerScroll() {
         if ($("body").height() > ($(window).height()-15)) {
             $("#footer").css("position","relative");
@@ -133,7 +134,6 @@ $(document).ready(function () {
         else
         {
             $("#footer").css("position","fixed");
-//            $("#footer").css("width","100%");
         }
     };
 
@@ -155,17 +155,24 @@ $(document).ready(function () {
     });
     
     function updateDropdown(p){
-        if(p == "pr")
+        //update the dropdown item based on current quoted item 
+        switch(p)
         {
-            $("#showDropdown").html("Parks &amp; Rec").append(" <span class=\"caret\"></span>");
-        }
-        else if(p == "all")
-        {
-            $("#showDropdown").html("All Shows").append(" <span class=\"caret\"></span>");
-        }
-        else
-        {
-            $("#showDropdown").html("Arrested Development").append(" <span class=\"caret\"></span>");
+            case "pr": 
+                $("#showDropdown").html("Parks &amp; Rec").append(" <span class=\"caret\"></span>");
+                break;
+            case "3r":
+                $("#showDropdown").html("30 Rock").append(" <span class=\"caret\"></span>");
+                break;
+            case "sp":
+                $("#showDropdown").html("It's Always Sunny").append(" <span class=\"caret\"></span>");
+                break;
+            case "all":
+                $("#showDropdown").html("All Shows").append(" <span class=\"caret\"></span>");
+                break;
+            default :
+                $("#showDropdown").html("Arrested Development").append(" <span class=\"caret\"></span>");
+                break;
         }
     }
 });

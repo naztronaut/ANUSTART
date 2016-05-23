@@ -30,10 +30,29 @@
     <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.10/clipboard.min.js"></script>
     <!--    custom script-->
     <script src="includes/script.js"></script>
+    <script src="includes/menu.js"></script>
 </head>
 
 <body>
     <div class="container">
+        <div class="row header">
+            <div class="col-sm-10"></div>
+            <div class="col-sm-2">
+                <div class="dropdown">
+            <span class="btn btn-default dropdown-toggle glyphicon glyphicon-menu-hamburger" id="menuDrop" type="button" data-toggle="dropdown" aria-hidden="true"></span>
+                    <ul class="dropdown-menu">
+                        <li><a class="btn menuTitle text" data-name="home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
+                        </li>
+                        <li><a class="btn menuTitle" data-name="about"><i class="fa fa-info" aria-hidden="true"></i> About</a>
+                        </li>
+                        <li><a class="btn menuTitle" data-name="contact"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contact</a>
+                        </li>
+                        <li><a class="btn menuTitle" data-name="howto"><i class="fa fa-question" aria-hidden="true"></i> How to </a>
+                        </li>
+                    </ul>
+            </div>
+            </div>
+        </div>
         <div class="row header">
             <div class="col-sm-12 text-center">
                 <img src="img/anustart.png" width="250px" />
@@ -60,6 +79,10 @@
                         <li><a class="btn showtitle" data-name="ad">Arrested Development</a>
                         </li>
                         <li><a class="btn showtitle" data-name="pr">Parks &amp; Rec</a>
+                        </li>
+                        <li><a class="btn showtitle" data-name="3r">30 Rock</a>
+                        </li>
+                        <li><a class="btn showtitle" data-name="sp">It's Always Sunny</a>
                         </li>
                         <li><a class="btn showtitle" data-name="all">All Shows</a>
                         </li>
