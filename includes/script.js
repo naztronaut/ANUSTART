@@ -78,7 +78,7 @@ $(document).ready(function () {
                 for (var i = 0; i < data.length - 2; i++) {
                     //create span element and input the incoming data name 
                     var nameSpan = $("<span>", {
-                        class: "name col-sm-3 text-right"
+                        class: "name col-xs-3 text-right"
                     });
                     $(nameSpan).text(data[i].name);
 
@@ -90,7 +90,7 @@ $(document).ready(function () {
 
                     //create span for quote and assign text from query
                     var quoteSpan = $("<span>", {
-                        class: "quote col-sm-9 text-justify"
+                        class: "quote col-xs-9 text-justify"
                     });
                     $(quoteSpan).text(data[i].quote);
 
